@@ -105,7 +105,7 @@ void engine_handler(boolean green_btn, boolean red_btn, boolean blue_btn, boolea
   if (red_btn)
   {
     digitalWrite(D1, LOW);
-    analogWrite(D0, 255);
+    analogWrite(D0, 127);
   }
 
   /* brake */
@@ -148,7 +148,7 @@ void run_app()
       transmitted_data[0][0], // green_btn
       transmitted_data[0][1], // red_btn,
       transmitted_data[0][2], // blue_btn,
-      transmitted_data[0][3], // yellow_btn
+      transmitted_data[0][3]  // yellow_btn
   );
 }
 

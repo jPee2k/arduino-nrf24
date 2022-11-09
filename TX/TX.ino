@@ -52,7 +52,7 @@ byte pins[5] = {
 #define joystick_setup_value 328
 #define joystick_correct_value 255
 
-unsigned int last_timestamp_btn_press[5]; // time of the last cklick button | remove fantom clicks
+unsigned int last_timestamp_btn_press[5]; // time of the last cklick button | remove fantom clicks (button bounce)
 boolean last_buttons_state[5];            // the last buttons state [green, red, blue, yellow, joystick]
 boolean isChanged = false;
 
