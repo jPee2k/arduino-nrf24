@@ -52,7 +52,8 @@ byte pins[5] = {
 #define joystick_setup_value 328
 #define joystick_correct_value 255
 
-boolean last_buttons_state[5]; // the last buttons state [green, red, blue, yellow, joystick]
+unsigned int last_timestamp_btn_press[5]; // time of the last cklick button | remove fantom clicks
+boolean last_buttons_state[5];            // the last buttons state [green, red, blue, yellow, joystick]
 boolean isChanged = false;
 
 int last_styck_val_x = 0;
@@ -69,7 +70,6 @@ void setup()
   {
     pinMode(pins[i], INPUT_PULLUP);
   }
-  pinMode(pins[5], INPUT_PULLUP);
   pinMode(pin_x, INPUT);
   pinMode(pin_y, INPUT);
 
@@ -138,10 +138,11 @@ void loop()
     /* transmitted_data[0][i] == current_button_state */
     transmitted_data[0][i] = !digitalRead(pins[i]) == HIGH;
 
-    if (transmitted_data[0][i] != last_buttons_state[i])
+    if (transmitted_data[0][i] != last_buttons_state[i] && millis() - last_timestamp_btn_press[i] > 60)
     {
       isChanged = true;
       last_buttons_state[i] = transmitted_data[0][i];
+      last_timestamp_btn_press[i] = millis();
     }
   }
 
